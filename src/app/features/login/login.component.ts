@@ -8,7 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { AuthService, LoginCredentials } from '../../shared/services';
+import { RegisterDialogComponent } from './register-dialog.component';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +23,8 @@ import { AuthService, LoginCredentials } from '../../shared/services';
         MatButtonModule,
         MatCardModule,
         MatIconModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatDialogModule
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
@@ -35,7 +38,8 @@ export class LoginComponent {
         private fb: FormBuilder,
         private router: Router,
         private authService: AuthService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private dialog: MatDialog
     ) {
         this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
@@ -88,5 +92,21 @@ export class LoginComponent {
 
     get password() {
         return this.loginForm.get('password');
+    }
+
+    openRegisterDialog() {
+        const dialogRef = this.dialog.open(RegisterDialogComponent, {
+            width: '450px',
+            disableClose: true // Yêu cầu người dùng bấm nút Hủy hoặc Đăng ký để đóng
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            // Nếu result có dữ liệu (người dùng bấm Đăng ký thành công)
+            if (result) {
+                this.snackBar.open('Đăng ký thành công! Vui lòng đăng nhập.', 'Đóng', { duration: 3000 });
+                // Tự động điền email vừa đăng ký vào form đăng nhập
+                this.loginForm.patchValue({ email: result.email });
+            }
+        });
     }
 }

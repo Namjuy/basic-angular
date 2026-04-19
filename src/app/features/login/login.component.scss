@@ -29,6 +29,12 @@
   font-size: 16px;
 }
 
+.card-actions {
+  display: flex;
+  justify-content: space-between; // Đẩy 2 nút ra 2 góc
+  padding: 0 8px 8px;
+}
+
 // Responsive design
 @media (max-width: 480px) {
   .login-container {
