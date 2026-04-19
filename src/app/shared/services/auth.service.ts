@@ -115,7 +115,10 @@ export class AuthService {
    * Logout user
    */
   logout(): void {
-    // Clear any stored authentication data
+    // Trong môi trường Backend thực tế: Phải gọi API để Backend xóa HttpOnly Cookie
+    // this.http.post('/api/logout', {}, { withCredentials: true }).subscribe();
+    
+    // Xóa thông tin hiển thị của user trên trình duyệt
     localStorage.removeItem('currentUser');
   }
 }

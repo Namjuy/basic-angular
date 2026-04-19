@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService, AuthUser } from '../../shared/services';
+import { AuthService, AuthUser } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
@@ -20,12 +20,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './register-dialog.component.html',
-  styleUrl: './register-dialog.component.scss'
+  styleUrl: './register-dialog.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterDialogComponent {
   registerForm: FormGroup;
-  hidePassword = true;
-  hideConfirmPassword = true;
+  hidePassword = signal(true);
+  hideConfirmPassword = signal(true);
 
   constructor(
     private fb: FormBuilder,
@@ -49,6 +50,14 @@ export class RegisterDialogComponent {
       return { passwordMismatch: true };
     }
     return null;
+  }
+
+  togglePassword() {
+    this.hidePassword.update(v => !v);
+  }
+
+  toggleConfirmPassword() {
+    this.hideConfirmPassword.update(v => !v);
   }
 
   onSubmit() {

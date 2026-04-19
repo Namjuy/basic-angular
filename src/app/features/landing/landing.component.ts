@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { AuthService, AuthUser } from '../../shared/services';
+import { AuthService, AuthUser } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-landing',
