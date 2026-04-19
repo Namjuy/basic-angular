@@ -1,0 +1,111 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="toolbar-title">
+    <mat-icon class="toolbar-icon">home</mat-icon>
+    Trang chủ
+  </span>
+  <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="user-menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <mat-icon>person</mat-icon>
+      <span>{{ currentUser?.name }}</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Đăng xuất</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<div class="landing-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Chào mừng, {{ currentUser?.name }}! 👋</h1>
+      <p class="subtitle">Bạn đã đăng nhập thành công vào hệ thống</p>
+    </div>
+  </section>
+
+  <!-- User Info Card -->
+  <div class="landing-content">
+    <div class="info-grid">
+      <!-- User Profile Card -->
+      <mat-card class="info-card user-card">
+        <mat-card-header>
+          <mat-icon class="card-icon">person</mat-icon>
+          <mat-card-title>Thông tin tài khoản</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-row">
+            <label>Tên:</label>
+            <span>{{ currentUser?.name }}</span>
+          </div>
+          <div class="info-row">
+            <label>Email:</label>
+            <span>{{ currentUser?.email }}</span>
+          </div>
+          <div class="info-row">
+            <label>Vai trò:</label>
+            <span class="role-badge">{{ currentUser?.role }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Features Card -->
+      <mat-card class="info-card features-card">
+        <mat-card-header>
+          <mat-icon class="card-icon">dashboard</mat-icon>
+          <mat-card-title>Tính năng</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="features-list">
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              <span>Quản lý tài khoản</span>
+            </li>
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              <span>Xem báo cáo</span>
+            </li>
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              <span>Cập nhật hồ sơ</span>
+            </li>
+            <li>
+              <mat-icon>check_circle</mat-icon>
+              <span>Hỗ trợ kỹ thuật</span>
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Quick Actions Card -->
+      <mat-card class="info-card actions-card">
+        <mat-card-header>
+          <mat-icon class="card-icon">flash_on</mat-icon>
+          <mat-card-title>Các tính năng nhanh</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="button-group">
+            <button mat-raised-button color="primary" (click)="navigateToDashboard()">
+              <mat-icon>dashboard</mat-icon>
+              Đi tới Dashboard
+            </button>
+            <button mat-raised-button color="accent">
+              <mat-icon>settings</mat-icon>
+              Cài đặt
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <p>&copy; 2026 My Angular App. Tất cả quyền được bảo vệ.</p>
+  </footer>
+</div>
