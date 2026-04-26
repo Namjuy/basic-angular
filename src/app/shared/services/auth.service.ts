@@ -106,9 +106,15 @@ export class AuthService {
    * In real app, this would check JWT token or session
    */
   isAuthenticated(): boolean {
-    // For demo purposes, just return false
-    // In real implementation, check localStorage or token
-    return false;
+    return !!localStorage.getItem('currentUser');
+  }
+
+  /**
+   * Get current logged in user
+   */
+  getCurrentUser(): AuthUser | null {
+    const userData = localStorage.getItem('currentUser');
+    return userData ? JSON.parse(userData) : null;
   }
 
   /**

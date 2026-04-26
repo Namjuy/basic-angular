@@ -37,9 +37,6 @@ export class LandingComponent implements OnInit {
     const userData = localStorage.getItem('currentUser');
     if (userData) {
       this.currentUser = JSON.parse(userData);
-    } else {
-      // If no user data, redirect to login
-      this.router.navigate(['/login']);
     }
   }
 
