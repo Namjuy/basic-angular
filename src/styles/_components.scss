@@ -20,7 +20,7 @@
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
-  
+
   &.btn-primary {
     background-color: $primary-color;
     color: $white;
@@ -38,7 +38,7 @@
 // ==========================================================================
 mat-form-field {
   // Ghi đè biến CSS của Material 3 để giảm chiều cao (mặc định 56px -> 40px)
-  --mat-form-field-container-height: 40px; 
+  --mat-form-field-container-height: 40px;
   --mat-form-field-container-text-size: 14px;
 
   // Làm nhỏ font chữ của nhãn (mat-label)
@@ -57,5 +57,4 @@ mat-form-field {
 // Căn giữa lại phần chữ thực tế (native input) khi người dùng gõ
 .mat-mdc-input-element {
   margin-top: 0 !important; // Loại bỏ khoảng đẩy mặc định nếu có
-  // transform: translateY(-2px); // Kéo phần chữ nhích lên trên 2px để bù trừ
 }

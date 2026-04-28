@@ -6,26 +6,40 @@ Dự án được tổ chức theo cấu trúc module/feature-based để dễ d
 ## Cấu trúc thư mục
 
 ```
-src/app/
-├── shared/                    # Các thành phần dùng chung
-│   ├── components/           # Component tái sử dụng
-│   │   └── index.ts          # Export tất cả components
-│   ├── services/             # Service dùng chung
-│   │   └── index.ts          # Export tất cả services
-│   └── utils/                # Utility functions
-│       └── index.ts          # Export tất cả utils
-├── features/                 # Các tính năng/màn hình
-│   ├── login/                # Màn login
-│   │   ├── login.component.ts
-│   │   ├── login.component.html
-│   │   ├── login.component.scss
-│   │   └── login.component.spec.ts
-│   └── index.ts              # Export tất cả features
-├── app.config.ts             # Cấu hình ứng dụng
-├── app.routes.ts             # Định tuyến
-├── app.ts                    # Component gốc
-├── app.html                  # Template gốc
-└── app.css                   # Styles gốc
+src/
+├── app/
+│   ├── core/                   # 1. CỐT LÕI (Chỉ khởi tạo 1 lần)
+│   │   ├── auth/               # Xử lý login, logout, token
+│   │   ├── guards/             # Bảo vệ route (auth.guard, admin.guard)
+│   │   ├── interceptors/       # Gắn token, bắt lỗi API toàn cục
+│   │   ├── services/           # ApiService, TokenService, Logger
+│   │   └── core.provider.ts    # Cấu hình tất cả core services
+│   ├── shared/                 # 2. DÙNG CHUNG (Tái sử dụng ở nhiều nơi)
+│   │   ├── components/         # UI Kit: Button, Card, Spinner, Modal
+│   │   ├── directives/         # ClickOutside, ZoomImage
+│   │   ├── pipes/              # FormatCurrency, TimeAgo
+│   │   ├── models/             # Domain Models (Product, User, Order)
+│   │   └── interfaces/         # API Request/Response types
+│   ├── layouts/                # 3. BỐ CỤC (Khung bao quanh)
+│   │   ├── main-layout/        # Header + Footer + Content (cho User)
+│   │   ├── admin-layout/       # Sidebar + Header + Content (cho Admin)
+│   │   └── auth-layout/        # Chỉ có router-outlet (cho Login/Register)
+│   ├── features/               # 4. TÍNH NĂNG (Theo nghiệp vụ)
+│   │   ├── home/               # Trang chủ
+│   │   ├── catalog/            # Danh mục & Sản phẩm (List, Detail, Search)
+│   │   ├── cart/               # Giỏ hàng
+│   │   ├── checkout/           # Thanh toán
+│   │   ├── profile/            # Thông tin cá nhân, lịch sử đơn hàng
+│   │   └── admin/              # Hệ thống quản trị (chia nhỏ feature con bên trong)
+│   ├── store/                  # 5. QUẢN LÝ TRẠNG THÁI (Signals/NgRx)
+│   │   ├── cart.store.ts       # Quản lý giỏ hàng toàn cục
+│   │   └── auth.store.ts       # Quản lý session user
+│   ├── app.config.ts           # Cấu hình App (Providers, Router, SSR)
+│   ├── app.routes.ts           # Định tuyến cấp cao nhất
+│   └── app.component.ts        # Component gốc
+├── assets/                     # Ảnh, icons, fonts, i18n (JSON)
+├── environments/               # Cấu hình API URL (Dev, Prod)
+└── styles/                     # Global SCSS, Variables, Mixins, Theme
 ```
 
 ## Cách sử dụng
